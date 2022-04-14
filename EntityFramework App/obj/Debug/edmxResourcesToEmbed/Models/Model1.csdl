@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="amarDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="amarDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Brands" EntityType="amarDBModel.Brand" />
+    <EntitySet Name="Categories" EntityType="amarDBModel.Category" />
+    <EntitySet Name="Products" EntityType="amarDBModel.Product" />
+    <AssociationSet Name="FK__Products__BrandI__4E88ABD4" Association="amarDBModel.FK__Products__BrandI__4E88ABD4">
+      <End Role="Brand" EntitySet="Brands" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__Catrgo__4D94879B" Association="amarDBModel.FK__Products__Catrgo__4D94879B">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="BrandID" />
+    </Key>
+    <Property Name="BrandID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BrandNeame" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="amarDBModel.FK__Products__BrandI__4E88ABD4" FromRole="Brand" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="amarDBModel.FK__Products__Catrgo__4D94879B" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="DateOfPurchase" Type="DateTime" Precision="3" />
+    <Property Name="AvailabilityStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryID" Type="Int64" />
+    <Property Name="BrandID" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Brand" Relationship="amarDBModel.FK__Products__BrandI__4E88ABD4" FromRole="Product" ToRole="Brand" />
+    <NavigationProperty Name="Category" Relationship="amarDBModel.FK__Products__Catrgo__4D94879B" FromRole="Product" ToRole="Category" />
+    <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__Products__BrandI__4E88ABD4">
+    <End Type="amarDBModel.Brand" Role="Brand" Multiplicity="0..1" />
+    <End Type="amarDBModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="BrandID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="BrandID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__Catrgo__4D94879B">
+    <End Type="amarDBModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="amarDBModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
