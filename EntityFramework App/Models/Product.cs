@@ -8,6 +8,7 @@ namespace EntityFramework_App.Models
 {
     public class Product
     {
+        [Key]
         public long ProductID { get; set; }
         public string ProductName { get; set; }
         public Nullable<decimal> Price { get; set; }
