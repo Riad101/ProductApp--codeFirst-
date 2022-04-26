@@ -30,12 +30,23 @@
                     <a class="nav-link" href="/categories/index">Category</a>
                     <a class="nav-link" href="/brands/index">Brand</a>
                     <a class="nav-link" href="/products/index">Product</a>
+                    <a class="nav-link" href="/account/register">Register</a>
+                    <a class="nav-link" href="/account/login">Login</a>
                 </div>
 
             </div>
-            <div class="col-3 text-white">
-                @ViewBag.message
-            </div>
+            @*<div class="col-3 text-white">
+            @ViewBag.message
+        </div>
+            *@
+
+            @if (User.Identity.IsAuthenticated == true)
+            {
+                <div class="col-3 text-white">
+                    Welcome @User.Identity.Name
+                </div>
+            }
+
         </div>
     </nav>
     <div class="container-fluid">
