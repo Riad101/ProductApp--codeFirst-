@@ -2,12 +2,12 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/admin_LayoutPage1.cshtml";
 }
 
 <h2>Edit</h2>
 
-<form action="/products/edit/@Model.ProductID" method="post" enctype="multipart/form-data">
+<form action="/admin/products/edit/@Model.ProductID" method="post" enctype="multipart/form-data">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="ProductName">Product Name</label>
@@ -110,5 +110,5 @@
 
     </div>
     <button type="submit" class="btn btn-success"> Save </button>
-    <a class="btn btn-danger" href="/products/index"> Cancel</a>
+    <a class="btn btn-danger" href="/admin/products/index"> Cancel</a>
 </form>

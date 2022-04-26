@@ -14,7 +14,8 @@ namespace EntityFramework_App.Controllers
 {
     public class AccountController : Controller
     {
-     
+
+    
         // GET: Account
         public ActionResult Register()
         {
@@ -93,8 +94,23 @@ namespace EntityFramework_App.Controllers
             {
                 ModelState.AddModelError("my error", "Invalid Login");
                 return View();
-            }
-            
+            }            
+        }
+
+        public ActionResult Logout()
+        {
+            var authenticationManager = HttpContext.GetOwinContext().Authentication;
+            authenticationManager.SignOut();
+            return RedirectToAction("Index", "Home"); 
+        }
+
+        public ActionResult MyProfile()
+        {
+            var appDbContext = new ApplicationDbContext();
+            var userStore = new ApplicationUserStore(appDbContext);
+            var userManager = new ApplicationUserManager(userStore);
+            ApplicationUser appUser = userManager.FindById(User.Identity.GetUserId());
+            return View(appUser);
         }
     }
 }

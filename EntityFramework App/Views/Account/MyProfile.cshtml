@@ -1,0 +1,38 @@
+﻿@model EntityFramework_App.Identity.ApplicationUser
+
+@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>MyProfile</h2>
+<table class="table-bordered">
+    <tr>
+        <th>Username</th>
+        <td>@Model.UserName</td>
+    </tr>
+
+    <tr>
+        <th>Email</th>
+        <td>@Model.Email</td>
+    </tr>
+
+    <tr>
+        <th>Address</th>
+        <td>@Model.Address</td>
+    </tr>
+
+    <tr>
+        <th>City</th>
+        <td>@Model.City</td>
+    </tr>
+
+    <tr>
+        <th>Country</th>
+        <td>@Model.Country</td>
+    </tr>
+
+</table>
+
+<a href="/home/index">Back</a>
+

@@ -6,7 +6,7 @@ using System;
 using static System.Net.WebRequestMethods;
 using System.ComponentModel.DataAnnotations;
 
-namespace EntityFramework_App.Controllers
+namespace EntityFramework_App.Areas.Admin.Controllers
 {
     public class ProductsController : Controller
     {

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using EntityFramework_App.Models;
 
-namespace EntityFramework_App.Controllers
+namespace EntityFramework_App.Areas.Admin.Controllers
 {
     public class CategoriesController : Controller
     {
