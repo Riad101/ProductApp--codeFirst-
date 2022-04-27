@@ -6,7 +6,7 @@ using System;
 using static System.Net.WebRequestMethods;
 using System.ComponentModel.DataAnnotations;
 
-namespace EntityFramework_App.Areas.Admin.Controllers
+namespace EntityFramework_App.Areas.Manager.Controllers
 {
     public class ProductsController : Controller
     {
@@ -151,20 +151,6 @@ namespace EntityFramework_App.Areas.Admin.Controllers
            
             return RedirectToAction("Index", "Products");
         }
-
-        public ActionResult Delete(long id)
-        {
-            Product prod = company_db.Products.Where(pd => pd.ProductID == id).FirstOrDefault();
-            return View(prod);
-        }
-
-        [HttpPost]
-        public ActionResult Delete(long id, Product p)
-        {
-            Product prod = company_db.Products.Where(pd => pd.ProductID == id).FirstOrDefault();
-            company_db.Products.Remove(prod);
-            company_db.SaveChanges();
-            return RedirectToAction("Index", "Products");
-        }
+        
     }
 }

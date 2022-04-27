@@ -28,7 +28,6 @@ namespace EntityFramework_App
             var userManager = new ApplicationUserManager(appUserStore);
 
             //creating admin
-
             if (!RoleManager.RoleExists("Admin"))
             {
                 var role = new IdentityRole();
@@ -53,16 +52,16 @@ namespace EntityFramework_App
                 }
             }
 
-            if (!RoleManager.RoleExists("Admin"))
+
+            //creating Manager role
+            if (!RoleManager.RoleExists("Manager"))
             {
                 var role = new IdentityRole();
-                role.Name = "Admin";
+                role.Name = "Manager";
                 RoleManager.Create(role);
             }
 
-
-
-            //creating Manager role
+            //creating ManagerUser
 
             if (!RoleManager.RoleExists("Manager"))
             {

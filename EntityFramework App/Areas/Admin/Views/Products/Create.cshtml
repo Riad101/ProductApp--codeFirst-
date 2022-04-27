@@ -1,69 +1,86 @@
 ﻿
-  @model EntityFramework_App.Models.Product
-  
-        
+@model EntityFramework_App.Models.Product
+
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/admin_LayoutPage1.cshtml";
 }
 
 <h2>Create Product</h2>
-@using (Html.BeginForm("Create", "Products", new { area = "Admin"}, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Products", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="form-row">
         <div class="form-group col-md-6">
-          
+
             @Html.LabelFor(p => p.ProductName)
             @Html.TextBoxFor(p => p.ProductName, new { placeholder = "Product Name", @class = "form-control" })
             @Html.ValidationMessageFor(m => m.ProductName)
-            
+
+
         </div>
 
         <div class="form-group col-md-6">
-            
+
             @*@<label for="Price">Price</label>
-            <input type="text" class="form-control" id="Price" name="Price" placeholder="Price" />
+                <input type="text" class="form-control" id="Price" name="Price" placeholder="Price" />
             *@
-            @Html.LabelFor(p=> p.Price)
-            @Html.TextBoxFor(p=> p.Price, new {placeholder = "Price", @class="form-control"})
-            @Html.ValidationMessageFor(m => m.Price)
+            @Html.LabelFor(p => p.Price)
+            @Html.TextBoxFor(p => p.Price, new { placeholder = "Price", @class = "form-control" })
+            @Html.ValidationMessageFor(p => p.Price)
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-6">
-           
-            @Html.LabelFor(p=> p.DateOfPurchase)
-         
-            @Html.TextBoxFor(p=> p.DateOfPurchase, new { placeholder = "Date of Purchase", @class = "form-control datepicker" })
-            @Html.ValidationMessageFor(m => m.DateOfPurchase)
+
+            @Html.LabelFor(p => p.DateOfPurchase)
+
+            @Html.TextBoxFor(p => p.DateOfPurchase, new { placeholder = "Date of Purchase", @class = "form-control datepicker" })
+            @Html.ValidationMessageFor(p => p.DateOfPurchase)
         </div>
 
-        <div class="form-group col-md-6">
-            <label for="AvailabilityStatus">Availability Status</label>
-            <select class="form-control" id="AvailabilityStatus" name="AvailabilityStatus">
-                <option value=""> Please Select</option>
-                <option value="InStock"> In Stock</option>
-                <option value="OutOfStock"> Out Of Stock</option>
+        <div class="col-md-6">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(temp => temp.AvailabilityStatus, new { @class = "form-check-label" })
+                <div class="form-check">
+                    @Html.RadioButtonFor(temp => temp.AvailabilityStatus, "InStock", new { @class = "form-check-input", id = "InStock" })
+                    <label class="form-check-label" for="InStock">In Stock</label>
+                </div>
+                <div class="form-check">
+                    @Html.RadioButtonFor(temp => temp.AvailabilityStatus, "OutOfStock", new { @class = "form-check-input", id = "OutOfStock" })
+                    <label class="form-check-label" for="OutOfStock">Out of Stock</label>
+                </div>
+                @Html.ValidationMessageFor(temp => temp.AvailabilityStatus)
+            </div>
+            @*
+                <div class="form-group col-md-6">
+                    <label for="AvailabilityStatus">Availability Status</label>
+                    <select class="form-control" id="AvailabilityStatus" name="AvailabilityStatus">
+                        <option value=""> Please Select</option>
+                        <option value="InStock"> In Stock</option>
+                        <option value="OutOfStock"> Out Of Stock</option>
 
-            </select>
+                    </select>
 
-            @Html.ValidationMessageFor(m => m.AvailabilityStatus)
+                    @Html.ValidationMessageFor(m => m.AvailabilityStatus)
+                </div>
+            *@
         </div>
     </div>
 
     <div class="form-row">
-        
+
         <div class="form-group col-md-6">
 
             @*<label for="CategoryID">Category ID </label>
-                @<select class="form-control" id="CategoryID" name="CategoryID">
-                 <option value="">Please Select</option>
-                 @foreach (var cat in ViewBag.Categories)
-                 {
-          s           <option value="@cat.CategoryID">@cat.CategoryName</option>
-                 }
-                </select>
+                      @<select class="form-control" id="CategoryID" name="CategoryID">
+                       <option value="">Please Select</option>
+                       @foreach (var cat in ViewBag.Categories)
+                       {
+                s           <option value="@cat.CategoryID">@cat.CategoryName</option>
+                       }
+                      </select>
             *@
 
             @Html.LabelFor(temp => temp.CategoryID)
@@ -83,27 +100,32 @@
                     }
                 </select>
             *@
-            @Html.LabelFor(p=>p.BrandID)
-            @Html.DropDownListFor(p=> p.BrandID, new SelectList(ViewBag.Brands, "BrandID", "BrandName"), "Please Select", new { @class = "form-control"})
+            @Html.LabelFor(p => p.BrandID)
+            @Html.DropDownListFor(p => p.BrandID, new SelectList(ViewBag.Brands, "BrandID", "BrandName"), "Please Select", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.BrandID)
         </div>
-           </div>
+    </div>
 
-           <div class="form-group">
-               <label for="image">Image</label>
-               <input type="file" class="form-control-file" id="image" name="Photo" />
-               @Html.ValidationMessageFor(m => m.Photo)
-           </div>
 
-           <div class="form-group">
-               <div class="form-check">
-                   <input class="form-check-input" type="checkbox" id="Active" name="Active" value="true" />
-                   <label class="form-check-label" for="Active"> Active</label>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="image">Image</label>
+            <input type="file" class="form-control-file" id="image" name="Photo" />
+            @Html.ValidationMessageFor(m => m.Photo)
+        </div>
 
-               </div>
+        <div class="form-group col-md-6">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="Active" name="Active" value="true" />
+                <label class="form-check-label" for="Active"> Active</label>
 
-           </div>
-           <button type="submit" class="btn btn-success"> Create </button>
-           <a class="btn btn-danger" href="/admin/products/index"> Cancel</a>
-        }
+            </div>
 
+        </div>
+    </div>
+
+        <button type="submit" class="btn btn-success"> Create </button>
+        <a class="btn btn-danger" href="/admin/products/index"> Cancel</a>
+        
+    
+  }
